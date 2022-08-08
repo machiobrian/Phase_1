@@ -1,0 +1,18 @@
+create a positive and negative image directory
+have your positive image(s)
+have your negative imagesssssss
+
+generate a negative.txt, a background, from the negative images: 
+find ./negative_images -iname "*png" > negative.txt
+
+create some positive samples based on the positive image
+opencv_createsamples -img right.png -bg negative.txt -info positive_images/positive.lst -pngoutput positive_images -maxxangle 1.0 -maxyangle 1.0 -maxzangle 1.0 -num 500
+
+create the vector file, where we stitch all of our positive images
+opencv_createsamples -info positive_images/positive.lst -num 500 -w 20 -h 20 -vec positives.vec
+
+create a data directory -> output for our images
+mkdir data_output
+
+run the train command
+opencv_traincascade -data data_output -vec positives.vec -bg negative.txt -numPos 500 -numNeg 250 -numStages 10 -w 20 -h 20 &
