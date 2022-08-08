@@ -1,0 +1,7 @@
+1. Focus on one motion
+-> Forward motion
+
+2. Use only one sign
+-> Stop sign
+
+-> Use the camera to find the stop sign and stop the robot.
