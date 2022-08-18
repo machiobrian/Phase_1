@@ -1,21 +1,28 @@
 run as super user: sudo su
+https://coding-robin.de/2013/07/22/train-your-own-opencv-haar-classifier.html
+
 
 create a positive and negative image directory
 have your positive image(s)
 have your negative imagesssssss
 
 generate a negative.txt, a background, from the negative images: 
-find ./negative_images -iname "*.png" > negative.txt
+find ./negative_images -iname "*.jpg" > negative.txt
 
 #create some positive samples based on the positive image
 
-opencv_createsamples -img pos_right.png -bg negative.txt -info positive_images/positive.lst -pngoutput positive_images -maxxangle 1.0 -maxyangle 1.0 -maxzangle 1.0 -num 500
+opencv_createsamples -img pos_right.jpg -bg negative.txt -info positive_images/positive.lst -pngoutput positive_images -maxxangle 1.0 -maxyangle 1.0 -maxzangle 1.0 -num 250
 
-create the vector file, where we stitch all of our positive images
-opencv_createsamples -info positive_images/positive.lst -num 500 -w 20 -h 20 -vec positives.vec
+#create the vector file, where we stitch all of our positive images
+
+opencv_createsamples -info positive_images/positive.lst -num 250 -w 20 -h 20 -vec positives.vec
 
 create a data directory -> output for our images
 mkdir data_output
 
-run the train command
-opencv_traincascade -data data_output -vec positives.vec -bg negative.txt -numPos 500 -numNeg 250 -numStages 10 -w 20 -h 20 &
+#run the train command
+
+opencv_traincascade -data data_output -vec positives.vec -bg negative.txt -numPos 125 -numNeg 120 -numStages 25 -w 20 -h 20 &
+
+#we shall alter the number of stages based on accuracy...it takes forever to train on 30
+

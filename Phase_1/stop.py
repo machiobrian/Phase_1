@@ -2,17 +2,18 @@ import cv2 as cv
 
 #stop sign cascade classifier
 
-stop_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Signs/cascade_stop_sign.xml')
-
+#stop_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Signs/cascade_stop_sign.xml')
+right_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/data_output/cascade.xml')
 cap = cv.VideoCapture(0)
 
 while cap.isOpened():
     _, img = cap.read()
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    stop_sign_scaled = stop_sign.detectMultiScale(gray, 1.3, 5)
+    #stop_sign_scaled = stop_sign.detectMultiScale(gray, 1.3, 5)
+    right_sign_scaled = right_sign.detectMultiScale(gray, 1.3,5)
 
     # Detect the stop sign, x,y = origin points, w = width, h = height
-    for (x, y, w, h) in stop_sign_scaled:
+    for (x, y, w, h) in right_sign_scaled:
         # Draw rectangle around the stop sign
         stop_sign_rectangle = cv.rectangle(img, (x,y),
                                             (x+w, y+h),
