@@ -1,4 +1,3 @@
-from itertools import count
 import cv2 as cv
 count = 0
 #stop sign cascade classifier
@@ -20,7 +19,7 @@ while cap.isOpened():
     left_sign_scaled = left_sign.detectMultiScale(gray, 1.3,5)
 
     # Detect the stop sign, x,y = origin points, w = width, h = height
-    for (x, y, w, h) in right_sign_scaled :
+    for (x, y, w, h) in left_sign_scaled :
         count += 1
         print(count)
         #Draw rectangle around the stop sign

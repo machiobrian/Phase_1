@@ -36,10 +36,7 @@ use_video_port=True):
         count += 1
         print(count)
 
-    if stop_sign_scaled == 1:
-        count += 1
-        print(count)
-        
+          
     #print(image.shape)
     cv.imshow("frame", image)
     key = cv.waitKey(1) & 0xFF
