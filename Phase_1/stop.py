@@ -19,9 +19,13 @@ while cap.isOpened():
     left_sign_scaled = left_sign.detectMultiScale(gray, 1.3,5)
 
     # Detect the stop sign, x,y = origin points, w = width, h = height
-    for (x, y, w, h) in left_sign_scaled :
-        count += 1
-        print(count)
+    for (x, y, w, h) in right_sign_scaled :
+        # count += 1
+        # print(count)
+        stop_width = w
+        stop_height = h
+        print(stop_width, stop_height)
+
         #Draw rectangle around the stop sign
         stop_sign_rectangle = cv.rectangle(img, (x,y),
                                             (x+w, y+h),
