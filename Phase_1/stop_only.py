@@ -12,7 +12,7 @@ import cv2 as cv
 #camera function - read sign
 
 def stop_camera():
-    stop_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Cascade_files/right_cascade.xml')
+    stop_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Cascade_files/left_cascade1.xml')
     cap = cv.VideoCapture(0) 
     while cap.isOpened():
         _, img = cap.read()

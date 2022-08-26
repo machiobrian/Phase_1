@@ -7,8 +7,8 @@ count = 0
 # right_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_right/data_output/cascade.xml')
 
 stop_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Cascade_files/stop_cascade.xml')
-left_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Cascade_files/left_cascade.xml')
-right_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Cascade_files/right_cascade.xml')
+left_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Cascade_files/left_cascade1.xml')
+right_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Cascade_files/right_cascade1.xml')
 cap = cv.VideoCapture(0)
 
 while cap.isOpened():
@@ -19,7 +19,7 @@ while cap.isOpened():
     left_sign_scaled = left_sign.detectMultiScale(gray, 1.3,5)
 
     # Detect the stop sign, x,y = origin points, w = width, h = height
-    for (x, y, w, h) in right_sign_scaled :
+    for (x, y, w, h) in left_sign_scaled :
         # count += 1
         # print(count)
         stop_width = w
