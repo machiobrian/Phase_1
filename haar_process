@@ -15,7 +15,7 @@ find ./negative_images -iname "*.jpg" > negative.txt
 
 #create some positive samples based on the positive image
 
-opencv_createsamples -img right.png -bg negative.txt -info positive_images/positive.lst -pngoutput positive_images -maxxangle 0.5 -maxyangle 0.5 -maxzangle 0.5 -num 1900
+opencv_createsamples -img reverse.png -bg negative.txt -info positive_images/positive.lst -pngoutput positive_images -maxxangle 0.5 -maxyangle 0.5 -maxzangle 0.5 -num 1900
 
 #create the vector file, where we stitch all of our positive images
 

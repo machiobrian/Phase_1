@@ -1,4 +1,4 @@
-import sys, tty, termios
+#import sys, tty, termios
 from gpiozero import Motor, PWMOutputDevice
 from time import sleep
 
