@@ -1,55 +1,38 @@
-"""
-what i want to achieve:
-    1. detect road sign - read function
-    2. measure the distance btn stop sign and bot - distance function
-    3. if dist > a_value_x, acknowlegde stop sign
-    4. stop the bot - stop function
-"""
-
-#camera lib setup
 import cv2 as cv
 
-#camera function - read sign
+stop_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Cascade_files/stop_cascade.xml')
+left_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Cascade_files/left_1L.xml')
+right_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Cascade_files/right_1R.xml')
 
-def stop_camera():
-    stop_sign = cv.CascadeClassifier('/home/machio_b/Desktop/Final Semester/Project/Vision AGV/Phase_/Cascade_files/stop_cascade.xml')
-    cap = cv.VideoCapture(0) 
-    while cap.isOpened():
-        _, img = cap.read()
-        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-        stop_sign_scaled = stop_sign.detectMultiScale(gray, 1.3, 2)
+#initialize a camera variable
+cap = cv.VideoCapture(0)
 
-        #detect sign and draw rectangle round it
-        for (x,y,w,h) in stop_sign_scaled:
-            stop_sign_rect = cv.rectangle(img, (x,y),
-                                      (x+w,y+h),
-                                      (0,255,256),3)
-            global stop_w
-            stop_w = w
-            global stop_h
-            stop_h = h
-            print(stop_w, stop_h)
-            measure_dist()
+while cap.isOpened():
+    _, gray = cap.read() #read frames in video
+    #gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY) # convert to gray scale for processing
 
-        cv.imshow("img", img)
-        key = cv.waitKey(30)
-        if key == ord('q'):
-            cap.release()
-            cv.destroyAllWindows()
-            break
+    stop_scaled = stop_sign.detectMultiScale(gray, 1.3, 5)
+    right_scaled = right_sign.detectMultiScale(gray, 1.3, 5)
+    left_scaled = left_sign.detectMultiScale(gray, 1.3, 5)
 
-#distance function
-def measure_dist():
-    """Since we have w and h, use it to determine dist from sign
-    distance = far, close, stop"""
-    #print(stop_w) #ccall this function inside a function
-    pixel = 200
-    max_pixel = 600
-    if stop_w in range(500, 530) and stop_h in range(300, 340):
-        print("stop bot")
-    else:
-        print("safe")
+    for (x,y,w,h) in stop_scaled:
+        rect = cv.rectangle(gray, (x,y),(x+w, y+h),(0, 255, 0), 3)
+        print('stop')
+    for (x,y,w,h) in right_scaled:
+        rect = cv.rectangle(gray, (x,y),(x+w, y+h),(0, 255, 0), 3)
+        print('right')
+    for (x,y,w,h) in left_scaled:
+        rect = cv.rectangle(gray, (x,y),(x+w, y+h),(0, 255, 0), 3)
+        print('left')
     
+    
+    cv.imshow("Image", gray)
+    key = cv.waitKey(30)
+    if key == ord('q'):
+        cap.release()
+        cv.destroyAllWindows()
+        break
 
-stop_camera()
-measure_dist()
+
+
+
